@@ -14,7 +14,8 @@ int main() {
         cin >> x;
         arr.clear();
 
-        // Intuition: Subtract largest power of that evenly divides current value
+        // Intuition: Repeatedly subtract largest power of 2 that is less than the current value,
+        //            and that evenly divides current value.
         while (x > 0) {
             exp = 2;
             while (x % exp == 0 && exp < x) {
