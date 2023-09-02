@@ -10,12 +10,12 @@ int main() {
     int idx = 0;
     bool flag;
     char curr;
-    string a;
+    string s;
 
     cin >> t;
     while (t--) {
-        a.clear();
-        cin >> a;
+        s.clear();
+        cin >> s;
         maxSort = 0;
         minUnsort = 0;
         idx = 0;
@@ -24,12 +24,12 @@ int main() {
         // Intuition: Keep track of longset sorted prefix and shortest unsorted prefix.
         //            If length(longest sorted) >= length(shortest unsorted), print NO, else YES.
         //            Also print NO if an array of length 1 or 0 is unsorted.
-        for (int i = 0; i < a.length(); i++) {
-            curr = a[i];
-            if (a[i] == '+') {
+        for (int i = 0; i < s.length(); i++) {
+            curr = s[i];
+            if (s[i] == '+') {
                 idx++;
             }
-            else if (a[i] == '-') {
+            else if (s[i] == '-') {
                 if (idx == maxSort) {
                     maxSort--;
                 }
@@ -38,10 +38,10 @@ int main() {
                 }
                 idx--;
             }
-            else if (a[i] == '1') {
+            else if (s[i] == '1') {
                 maxSort = idx;
             }
-            else if (a[i] == '0') {
+            else if (s[i] == '0') {
                 if (idx < 2) {
                     cout << "NO\n";
                     flag = false;
