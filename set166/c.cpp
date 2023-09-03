@@ -1,49 +1,51 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Sum of Two Numbers
+// Divan and a New Project
+
+void solve(int n, vector<pair<long long int, long long int>> arr) {
+    long long int out = 0;
+    int dist = 1;
+    vector<int> coords(n + 1, 0);
+    
+    // Intuition: Keep most visited buildings as close to HQ as possible.
+    //            Put HQ at 0, most visted building at 1, second most at -1,
+    //            third most at 2, fourth most at -2, etc.
+    sort(arr.rbegin(), arr.rend());
+    for (int i = 0; i < n; i++) {
+        out += arr[i].first * dist * 2;
+        if (i % 2) {
+            coords[arr[i].second + 1] = -dist;
+            dist++;
+        }
+        else {
+            coords[arr[i].second + 1] = dist;
+        }
+    }
+
+    cout << out << '\n';
+    for (int i : coords) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+}
 
 int main() {
     int t;
     int n;
-    int x;
-    int y;
-    int digit;
-    int direction;
-    int power;
+    int val;
+    vector<pair<long long int, long long int>> arr;
 
     cin >> t;
     while (t--) {
-        x = 0;
-        y = 0;
-        direction = 0;
-        power = 0;
         cin >> n;
-
-        // Intuition: Go digit by digit, split down the middle if even,
-        //              otherwise alternate which side gets larger value
-        while (n) {
-            digit = n % 10;
-            
-            if (digit % 2 == 0) { // If digit is even, split evenly
-                x += (digit / 2) * pow(10, power);
-                y += (digit / 2) * pow(10, power);
-            }
-            else { // If digit is odd, send greater half to the side w smaller value
-                if (direction % 2) {
-                    x += (digit / 2 + 1) * pow(10, power);
-                    y += (digit / 2) * pow(10, power);
-                }
-                else {
-                    x += (digit / 2) * pow(10, power);
-                    y += (digit / 2 + 1) * pow(10, power);
-                }
-                direction++;
-            }
-            n /= 10;
-            power++;
+        arr.resize(n);
+        // Store (val, idx) pairs
+        for (int i = 0; i < n; i++) {
+            cin >> val;
+            arr[i] = make_pair(val, i);
         }
-        cout << x << ' ' << y << '\n';
+        solve(n, arr);
     }
 
     return 0;
