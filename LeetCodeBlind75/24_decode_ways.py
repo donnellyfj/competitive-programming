@@ -1,3 +1,4 @@
+# 91. Decode Ways
 def numDecodings(self, s: str) -> int:
     # Check for leading zeros or double zero (invalid)
     if s[0] == '0':
