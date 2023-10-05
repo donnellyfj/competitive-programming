@@ -9,7 +9,7 @@ def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
     # Traverse like a graph, look for cycles
     visited = [False] * numCourses
     stack = [False] * numCourses
-    def dfs(course, stack):
+    def dfs(course):
         if stack[course]:
             return False
         if visited[course]:
@@ -20,7 +20,7 @@ def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         visited[course] = True
         for pre in mapping[course]:
             if not visited[pre]:
-                out = dfs(pre, stack)
+                out = dfs(pre)
                 if out == False:
                     return False
             if stack[pre]:
@@ -32,7 +32,7 @@ def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         return True
     
     for course, pre in prerequisites:
-        if not visited[course] and dfs(course, stack) == False:
+        if not visited[course] and dfs(course) == False:
             return False
 
     return True
