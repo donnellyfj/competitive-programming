@@ -16,7 +16,7 @@ def rob(self, nums: List[int]) -> int:
     # Try starting at house 0 and ignoring last house
     out1 = tryHouses(nums[:-1])
 
-    # Try starting at house 1 using ignoring last house
+    # Try starting at house 1 using last house
     out2 = tryHouses(nums[1:])
 
     return max(out1, out2)
