@@ -2,17 +2,15 @@
 from typing import List
 def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
     out = []
-    def makeSum(nums, currSum):
-        nonlocal out
+    def dfs(idx, currSum, nums):
         if currSum >= target:
             if currSum == target:
-                sortNums = sorted(nums)
-                if sortNums not in out:
-                    out.append(sortNums)
+                out.append(nums)
             return
+        
+        for i in range(idx, len(candidates)):
+            dfs(i, currSum + candidates[i], nums + [candidates[i]])
+    
+    dfs(0, 0, [])
 
-        for i in candidates:
-            makeSum(nums + [i], currSum + i)
-
-    makeSum([], 0)
     return out
