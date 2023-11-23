@@ -3,28 +3,30 @@ using namespace std;
  
 // Great Sequence
 
-void solve(int n, int x, vector<int> arr) {
+void solve(long long int n, long long int x, vector<long long int> arr) {
     // Intuition: Greedily select pairs.
     sort(arr.begin(), arr.end());
-    vector<int> seen(n, 0);
-    int out = 0;
-    int r = 0;
-    for (int l = 0; l < n; l++) {
-        if (seen[l]) {
+    // Keep track of indices that have been paired up already
+    vector<int> usedIdx(n, 0);
+    long long int out = 0;
+
+    int j = 0;
+    for (int i = 0; i < n; i++) {
+        // Check if idx has been paired already
+        if (usedIdx[i]) {
             continue;
         }
-        long long int target;
-        target = (long long)arr[l] * x;
-        // Look for target
-        while (r < n && arr[r] < target) {
-            r++;
+        // Look for x * arr[i] in arr with linear search
+        long long int target = x * arr[i];
+        while (j < n && arr[j] < target) {
+            j++;
         }
-        if (r < n && arr[r] == target) {
-            seen[r]++;
-            r++;
+        if (j < n && arr[j] == target) {
+            usedIdx[j] = 1;
+            j++;
         }
         else {
-            out++;
+            out += 1;
         }
     }
 
@@ -33,9 +35,9 @@ void solve(int n, int x, vector<int> arr) {
  
 int main() {
     int t;
-    int n;
-    int x;
-    vector<int> arr;
+    long long int n;
+    long long int x;
+    vector<long long int> arr;
  
     cin >> t;
     while (t--) {
