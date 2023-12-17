@@ -26,7 +26,7 @@ void solve(long long int n, long long int x) {
                 mUpper = min(mUpper, curr);
             }
             else {
-                // This bit  doesn't exist in x, so we need to remove it from n
+                // This bit doesn't exist in x, so we need to remove it from n
                 mLower = max(mLower, curr);
             }
         }
