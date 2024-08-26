@@ -4,7 +4,7 @@ using namespace std;
 // Disturbed People
 
 void solve(int n, vector<int> arr) {
-    // Intuition: In the case of 1 0 1, have have the 1 on the right turn to 0
+    // Intuition: In the case of 1 0 1, have the 1 on the right turn to 0
     int out = 0;
 
     for (int i = 1; i < n - 1; i++) {
